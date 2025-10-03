@@ -53,6 +53,8 @@ class AlienInvasion:
             sys.exit()
         elif event.key == pygame.K_f:
             self._toggle_fullscreen()
+        elif event.key == pygame.K_SPACE:
+            self._fire_bullet()
 
     def _check_keyup_events(self, event):
         """Respond to key releases."""
@@ -75,10 +77,17 @@ class AlienInvasion:
         # Adjust ship position to new screen size
         self.ship.rect.midbottom = self.ship.screen_rect.midbottom
         self.ship.x = float(self.ship.rect.x)
-        
+
+    def _fire_bullet(self):
+        """Create a new bullet and add it to the bullets group."""
+        new_bullet = Bullet(self)
+        self.bullets.add(new_bullet)
+
     def _update_screen(self):
         """Update images on the screen, and flip to the new screen."""
         self.screen.fill(self.settings.bg_color)
+        for bullet in self.bullets.sprites():
+            bullet.draw_bullet()
         self.ship.blitme()
         pygame.display.flip()
 
