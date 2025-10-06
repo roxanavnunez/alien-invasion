@@ -19,10 +19,11 @@ class Settings:
         self.bullet_color = (60, 60, 60)
 
         # Alien settings
-        self.scale_factor = 0.2
+        self.alien_scale_factor = 0.2
+        self.alien_speed = 1.0
     
     def resize_alien_image(self, original_size):
         """Resize the alien image based on the scale factor."""
-        new_width = int(original_size[0] * self.scale_factor)
-        new_height = int(original_size[1] * self.scale_factor)
+        new_width = int(original_size[0] * self.alien_scale_factor)
+        new_height = int(original_size[1] * self.alien_scale_factor)
         return (new_width, new_height)

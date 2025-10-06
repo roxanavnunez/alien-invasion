@@ -33,8 +33,8 @@ class AlienInvasion:
             # Watch for keyboard and mouse events.
             self._check_events()
             self.ship.update()
-            self.bullets.update()
             self._update_bullets()
+            self._update_aliens()
             self._update_screen()         
             self.clock.tick(60)
     
@@ -126,6 +126,10 @@ class AlienInvasion:
             # Increment y-value
             current_x = alien_width
             current_y += 2 * alien_height
+
+    def _update_aliens(self):
+        """Update the positions of all aliens in the fleet."""
+        self.aliens.update()
 
     def _update_screen(self):
         """Update images on the screen, and flip to the new screen."""
