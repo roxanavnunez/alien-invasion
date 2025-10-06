@@ -98,6 +98,13 @@ class AlienInvasion:
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
 
+    def _create_alien(self, current_x):
+        """Create an alien and place it in the row."""
+        new_alien = Alien(self)
+        new_alien.x = current_x
+        new_alien.rect.x = current_x
+        self.aliens.add(new_alien)
+
     def _create_fleet(self):
         """Create a full fleet of aliens."""
         # Make an alien
@@ -109,10 +116,7 @@ class AlienInvasion:
 
         # Create aliens until there is no more space
         while current_x < (self.settings.screen_width - 2 * alien_width):
-            new_alien = Alien(self)
-            new_alien.x = current_x
-            new_alien.rect.x = current_x
-            self.aliens.add(new_alien)
+            self._create_alien(current_x)
             current_x += 2 * alien_width
 
     def _update_screen(self):
