@@ -98,11 +98,12 @@ class AlienInvasion:
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
 
-    def _create_alien(self, current_x):
+    def _create_alien(self, current_x, current_y):
         """Create an alien and place it in the row."""
         new_alien = Alien(self)
         new_alien.x = current_x
         new_alien.rect.x = current_x
+        new_alien.rect.y = current_y 
         self.aliens.add(new_alien)
 
     def _create_fleet(self):
@@ -110,14 +111,21 @@ class AlienInvasion:
         # Make an alien
         alien = Alien(self)
 
-        # Spacing between each alien is equal to one alien width
-        alien_width = alien.rect.width
-        current_x = alien_width
+        # Spacing between aliens is one alien width and one alien height
+        alien_width, alien_height = alien.rect.size
+        current_x, current_y = alien_width, alien_height
 
         # Create aliens until there is no more space
-        while current_x < (self.settings.screen_width - 2 * alien_width):
-            self._create_alien(current_x)
-            current_x += 2 * alien_width
+        while current_y < (self.settings.screen_height - 3 * alien_height):
+            # Create a row of aliens
+            while current_x < (self.settings.screen_width - 2 * alien_width):
+                self._create_alien(current_x, current_y)
+                current_x += 2 * alien_width
+            
+            # Finish the row; reset x; move down to next row
+            # Increment y-value
+            current_x = alien_width
+            current_y += 2 * alien_height
 
     def _update_screen(self):
         """Update images on the screen, and flip to the new screen."""
