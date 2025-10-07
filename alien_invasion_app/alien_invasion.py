@@ -30,17 +30,21 @@ class AlienInvasion:
         self.ship = Ship(self)
         self.bullets = pygame.sprite.Group()
         self.aliens = pygame.sprite.Group()
-
         self._create_fleet()
+
+        # Start in an active state.
+        self.game_active = True
        
     def run_game(self):
         """Start the main loop for the game."""
         while True:
-            # Watch for keyboard and mouse events.
             self._check_events()
-            self.ship.update()
-            self._update_bullets()
-            self._update_aliens()
+
+            if self.game_active:
+                self.ship.update()
+                self._update_bullets()
+                self._update_aliens()
+            
             self._update_screen()         
             self.clock.tick(60)
     
@@ -190,19 +194,19 @@ class AlienInvasion:
 
     def _ship_hit(self):
         """Respond to the ship being hit by an alien."""
-        # Decrement ships_left.
-        self.stats.ships_left -= 1
-
-        # Get rid of any remaining aliens and bullets.
-        self.aliens.empty()
-        self.bullets.empty()
-
-        # Create a new fleet and center the ship.
-        self._create_fleet()    
-        self.ship.center_ship()
-
-        # Pause.
-        sleep(0.5)
+        if self.stats.ships_left > 0:
+            # Decrement ships_left.
+            self.stats.ships_left -= 1
+            # Get rid of any remaining aliens and bullets.
+            self.aliens.empty()
+            self.bullets.empty()
+            # Create a new fleet and center the ship.
+            self._create_fleet()    
+            self.ship.center_ship()
+            # Pause.
+            sleep(0.5)
+        else:
+            self.game_active = False
            
     def _update_screen(self):
         """Update images on the screen, and flip to the new screen."""
