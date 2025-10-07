@@ -12,7 +12,7 @@ class Ship:
         # Load the ship image and resize it
         original_image = pygame.image.load('images/ship.png').convert_alpha()
         original_size = original_image.get_size()
-        new_size = self.settings.resize_ship_image(original_size)
+        new_size = self.settings.resize_image(original_size, self.settings.ship_scale)
         self.image = pygame.transform.scale(original_image, new_size)
 
         # Get the rect of the image.

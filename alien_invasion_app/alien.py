@@ -15,7 +15,7 @@ class Alien(Sprite):
 
         # Scale the alien image to 20% of its original size
         original_size = original_image.get_size()
-        new_size = self.settings.resize_alien_image(original_size)
+        new_size = self.settings.resize_image(original_size, self.settings.alien_scale_factor)
         self.image = pygame.transform.scale(original_image, new_size)
 
         # Get the rect of the scaled image
