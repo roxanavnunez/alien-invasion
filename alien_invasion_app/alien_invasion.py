@@ -90,9 +90,10 @@ class AlienInvasion:
     def _play_game(self):
         """Start a new game."""
         if not self.game_active:
-            # Reset the game statistics.
+            # Reset the game statistics and settings.
             self.stats.reset_stats()
             self.game_active = True
+            self.settings.initialize_dynamic_settings()
 
             # Get rid of any remaining aliens and bullets.
             self.aliens.empty()
