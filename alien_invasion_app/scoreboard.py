@@ -11,6 +11,7 @@ class Scoreboard:
         self.screen_rect = self.screen.get_rect()
         self.settings = ai_game.settings
         self.stats = ai_game.stats
+        self.level_rect = None
 
         # Font settings for scoring information.
         self.text_color = (30, 30, 30)
