@@ -142,6 +142,7 @@ class AlienInvasion:
             # Destroy existing bullets and create new fleet.
             self.bullets.empty()
             self._create_fleet()
+            self.settings.increase_speed()
 
     def _update_bullets(self):
         """Update position of bullets and get rid of old bullets."""
