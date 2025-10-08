@@ -94,6 +94,7 @@ class AlienInvasion:
         if not self.game_active:
             # Reset the game statistics and settings.
             self.stats.reset_stats()
+            self.sb.prep_score()
             self.game_active = True
             self.settings.initialize_dynamic_settings()
 
