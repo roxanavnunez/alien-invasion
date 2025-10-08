@@ -77,6 +77,8 @@ class AlienInvasion:
             self._toggle_fullscreen()
         elif event.key == pygame.K_SPACE:
             self._fire_bullet()
+        elif event.key ==pygame.K_p:
+            self._play_game()
 
     def _check_keyup_events(self, event):
         """Respond to key releases."""
@@ -85,11 +87,9 @@ class AlienInvasion:
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = False
 
-    def _check_play_button(self, mouse_pos):
-        """Start a new game when the player clicks Play."""
-        
-        button_clicked = self.play_button.rect.collidepoint(mouse_pos)
-        if button_clicked and not self.game_active:
+    def _play_game(self):
+        """Start a new game."""
+        if not self.game_active:
             # Reset the game statistics.
             self.stats.reset_stats()
             self.game_active = True
@@ -104,6 +104,12 @@ class AlienInvasion:
 
             # Hide the mouse cursor.
             pygame.mouse.set_visible(False)
+
+    def _check_play_button(self, mouse_pos):
+        """Start a new game when the player clicks Play."""
+        button_clicked = self.play_button.rect.collidepoint(mouse_pos)
+        if button_clicked and not self.game_active:
+            self._play_game()
         
     def _toggle_fullscreen(self):
         """Toggle fullscreen mode and reposition the ship."""
