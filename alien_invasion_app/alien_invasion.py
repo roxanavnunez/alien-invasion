@@ -95,6 +95,7 @@ class AlienInvasion:
             # Reset the game statistics and settings.
             self.stats.reset_stats()
             self.sb.prep_score()
+            self.sb.prep_level()
             self.game_active = True
             self.settings.initialize_dynamic_settings()
 
@@ -153,6 +154,10 @@ class AlienInvasion:
             self.bullets.empty()
             self._create_fleet()
             self.settings.increase_speed()
+
+            # Increase level.
+            self.stats.level += 1
+            self.sb.prep_level()
 
     def _update_bullets(self):
         """Update position of bullets and get rid of old bullets."""
