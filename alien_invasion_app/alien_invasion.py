@@ -54,11 +54,16 @@ class AlienInvasion:
             self._update_screen()         
             self.clock.tick(60)
     
+    def _close_game(self):
+        """Close the game and save high score."""
+        self.stats.save_high_score()
+        sys.exit()
+    
     def _check_events(self):
         """Respond to keypresses and mouse events."""
         for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    sys.exit()
+                    self._close_game()
                 elif event.type == pygame.KEYDOWN:
                     self._check_keydown_events(event)
                 elif event.type == pygame.KEYUP:
@@ -74,7 +79,7 @@ class AlienInvasion:
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = True
         elif event.key == pygame.K_ESCAPE:
-            sys.exit()
+            self._close_game()
         elif event.key == pygame.K_f:
             self._toggle_fullscreen()
         elif event.key == pygame.K_SPACE:
