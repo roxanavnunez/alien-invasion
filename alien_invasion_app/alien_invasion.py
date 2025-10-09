@@ -57,7 +57,7 @@ class AlienInvasion:
                 self._update_aliens()
 
                 # Aliens shoot at level 3
-                if self.stats.level >= 1:
+                if self.stats.level >= 3:
                     self._alien_fire()
             
             self._update_screen()         
@@ -295,7 +295,7 @@ class AlienInvasion:
 
     def _alien_fire(self):
         """Control frequency of alien shooting"""
-        if random.randint(1,80) == 1 and self.aliens:
+        if random.randint(1,self.settings.alien_bullet_random) == 1 and self.aliens:
             # Chose a random alien to shoot
             random_alien = random.choice(self.aliens.sprites())
             new_bullet = AlienBullet(self, random_alien)
