@@ -296,7 +296,6 @@ class AlienInvasion:
     def _alien_fire(self):
         """Control frequency of alien shooting"""
         if random.randint(1,80) == 1 and self.aliens:
-            print("Disparo alien")
             # Chose a random alien to shoot
             random_alien = random.choice(self.aliens.sprites())
             new_bullet = AlienBullet(self, random_alien)
