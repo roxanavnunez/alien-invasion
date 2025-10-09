@@ -46,7 +46,7 @@ class AlienInvasion:
         while True:
             self._check_events()
 
-            if self.game_active:
+            if self.game_active and not self.stats.game_paused:
                 self.ship.update()
                 self._update_bullets()
                 self._update_aliens()
@@ -80,7 +80,8 @@ class AlienInvasion:
         elif event.key == pygame.K_SPACE:
             self._fire_bullet()
         elif event.key ==pygame.K_p:
-            self._play_game()
+            if self.game_active:
+                self.stats.game_paused = not self.stats.game_paused
 
     def _check_keyup_events(self, event):
         """Respond to key releases."""
