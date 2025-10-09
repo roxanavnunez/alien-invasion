@@ -22,8 +22,11 @@ class AlienInvasion:
         self.clock = pygame.time.Clock()
         self.settings = Settings()
 
-        self.screen = pygame.display.set_mode(
-            (self.settings.screen_width, self.settings.screen_height))
+        # Create screen with FULLSCREEN mode
+        self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+        self.settings.screen_width = self.screen.get_width()
+        self.settings.screen_height = self.screen.get_height()
+
         pygame.display.set_caption("Alien Invasion")
 
         # Create an instance to store game statistics and scoreboard.
@@ -86,8 +89,6 @@ class AlienInvasion:
             self.ship.moving_left = True
         elif event.key == pygame.K_ESCAPE:
             self._close_game()
-        elif event.key == pygame.K_f:
-            self._toggle_fullscreen()
         elif event.key == pygame.K_SPACE:
             self._fire_bullet()
         elif event.key ==pygame.K_p:
@@ -128,20 +129,6 @@ class AlienInvasion:
         button_clicked = self.play_button.rect.collidepoint(mouse_pos)
         if button_clicked and not self.game_active:
             self._play_game()
-        
-    def _toggle_fullscreen(self):
-        """Toggle fullscreen mode and reposition the ship."""
-        self.settings.fullscreen = not self.settings.fullscreen
-        if self.settings.fullscreen:
-            self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
-        else:
-            self.screen = pygame.display.set_mode(
-                (self.settings.screen_width, self.settings.screen_height))
-        self.ship.screen = self.screen
-        self.ship.screen_rect = self.screen.get_rect()
-        
-        # Adjust ship position to new screen size
-        self.ship.center_ship()
 
     def _fire_bullet(self):
         """Create a new bullet and add it to the bullets group."""
