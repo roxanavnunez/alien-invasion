@@ -10,6 +10,7 @@ from alien import Alien
 from game_stats import GameStats
 from button import Button
 from scoreboard import Scoreboard
+from alien_bullet import AlienBullet
 
 class AlienInvasion:
     """Overall class to manage game assets and behavior."""
@@ -32,6 +33,7 @@ class AlienInvasion:
         # Create a ship, a group of bullets, and a group of aliens.
         self.ship = Ship(self)
         self.bullets = pygame.sprite.Group()
+        self.alien_bullets = pygame.sprite.Group()
         self.aliens = pygame.sprite.Group()
         self._create_fleet()
 
