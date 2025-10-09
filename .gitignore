@@ -33,8 +33,7 @@ Thumbs.db
 *.db
 *.sqlite3
 
-# Generated media files (if applicable)
-# For example, if your game generates screenshots or recordings
+# Generated media files
 /screenshots/
 /recordings/
 
