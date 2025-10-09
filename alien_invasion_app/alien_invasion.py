@@ -73,7 +73,7 @@ class AlienInvasion:
             self.ship.moving_right = True
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = True
-        elif event.key == pygame.K_q:
+        elif event.key == pygame.K_ESCAPE:
             sys.exit()
         elif event.key == pygame.K_f:
             self._toggle_fullscreen()
