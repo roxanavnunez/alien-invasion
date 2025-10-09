@@ -9,7 +9,7 @@ class AlienBullet(Bullet):
         super().__init__(ai_game)
         self.rect.midbottom = alien.rect.midtop
         self.y = float(self.rect.y)
-        self.color = (255, 0, 0)
+        self.color = self.settings.alien_bullet_color
     
     def update(self):
         """Move the bullet down the screen."""
