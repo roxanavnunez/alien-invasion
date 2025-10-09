@@ -63,7 +63,10 @@ class Scoreboard:
         self.ships = Group()
         for ship_number in range(self.stats.ships_left):
             ship = Ship(self.ai_game)
-            ship.rect.x = 10 + ship_number * ship.rect.width
+            new_size = self.settings.resize_image(ship.image.get_size(), self.settings.remain_ship_scale)
+            ship.image = pygame.transform.scale(ship.image, new_size)
+            ship.rect = ship.image.get_rect()
+            ship.rect.x = 10 + ship_number * (ship.rect.width +10)
             ship.rect.y = 10
             self.ships.add(ship)
 
