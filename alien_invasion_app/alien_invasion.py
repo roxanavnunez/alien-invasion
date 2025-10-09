@@ -1,7 +1,7 @@
 import sys
 from time import sleep
-
 import pygame
+import random
 
 from settings import Settings
 from ship import Ship
@@ -52,6 +52,10 @@ class AlienInvasion:
                 self.ship.update()
                 self._update_bullets()
                 self._update_aliens()
+
+                # Aliens shoot at level 3
+                if self.stats.level >= 1:
+                    self._alien_fire()
             
             self._update_screen()         
             self.clock.tick(60)
@@ -160,6 +164,7 @@ class AlienInvasion:
         if not self.aliens:
             # Destroy existing bullets and create new fleet.
             self.bullets.empty()
+            self.alien_bullets.empty()            
             self._create_fleet()
             self.settings.increase_speed()
 
@@ -178,6 +183,14 @@ class AlienInvasion:
                 self.bullets.remove(bullet)
         
         self._check_bullet_alien_collisions()
+
+        self.alien_bullets.update()
+        for bullet in self.alien_bullets.copy():
+            if bullet.rect.top >= self.screen.get_rect().bottom:
+                self.alien_bullets.remove(bullet)
+        
+        if pygame.sprite.spritecollideany(self.ship, self.alien_bullets):
+            self._ship_hit()
         
         if not self.aliens:
             # Destroy existing bullets and create new fleet.
@@ -283,6 +296,7 @@ class AlienInvasion:
             # Get rid of any remaining aliens and bullets.
             self.aliens.empty()
             self.bullets.empty()
+            self.alien_bullets.empty()
             # Create a new fleet and center the ship.
             self._create_fleet()    
             self.ship.center_ship()
@@ -291,14 +305,29 @@ class AlienInvasion:
         else:
             self.game_active = False
             pygame.mouse.set_visible(True)
-           
+
+    def _alien_fire(self):
+        """Control frequency of alien shooting"""
+        if random.randint(1,80) == 1 and self.aliens:
+            print("Disparo alien")
+            # Chose a random alien to shoot
+            random_alien = random.choice(self.aliens.sprites())
+            new_bullet = AlienBullet(self, random_alien)
+            self.alien_bullets.add(new_bullet)
+
     def _update_screen(self):
         """Update images on the screen, and flip to the new screen."""
         self.screen.fill(self.settings.bg_color)
-        for bullet in self.bullets.sprites():
-            bullet.draw_bullet()
         self.ship.blitme()
         self.aliens.draw(self.screen)
+
+        # Draw bullets for ship.
+        for bullet in self.bullets.sprites():
+            bullet.draw_bullet()
+        
+        # Draw bullets for aliens.
+        for bullet in self.alien_bullets.sprites():
+            bullet.draw_bullet()
 
         # Draw the score information.
         self.sb.show_score()
