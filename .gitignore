@@ -1,43 +1,44 @@
-# Archivos de cache y compilados de Python
+# Python cache and compiled files
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
 
-# Entornos virtuales
+# Virtual environments
 .venv/
 venv/
 ENV/
 env/
 
-# Archivos de empaquetado y distribución
+# Packaging and distribution files
 build/
 dist/
 *.egg-info/
 *.egg
 
-# Archivos específicos del sistema operativo
+# Operating system specific files
 .DS_Store
 Thumbs.db
 
-# Archivos de configuración de IDEs y editores
+# IDE and editor configuration files
 .idea/
 .vscode/
 *.swp
 *.swo
 
-# Archivos de registro (logs)
+# Log files
 *.log
 
-# Archivos de bases de datos locales
+# Local database files
 *.db
 *.sqlite3
 
-# Archivos multimedia generados (si aplica)
-# Por ejemplo, si tu juego genera capturas de pantalla o grabaciones
+# Generated media files (if applicable)
+# For example, if your game generates screenshots or recordings
 /screenshots/
 /recordings/
 
-# Archivos con secretos o credenciales (¡MUY IMPORTANTE!)
+# Files with secrets or credentials
 .env
 credentials.json
+high_score.json
