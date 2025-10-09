@@ -176,35 +176,48 @@ class AlienInvasion:
             self.bullets.empty()
             self._create_fleet()
 
-    def _create_alien(self, current_x, current_y):
+    def _create_alien(self, alien_number, row_number, side_margin):
         """Create an alien and place it in the row."""
-        new_alien = Alien(self)
-        new_alien.x = current_x
-        new_alien.rect.x = current_x
-        new_alien.rect.y = current_y 
-        self.aliens.add(new_alien)
+        alien = Alien(self)
+        alien_width, alien_height = alien.rect.size
+
+        # Position X now uses the calculated side margin for perfect centering.
+        x = side_margin + 2 * alien_width * alien_number
+        alien.rect.x = x
+
+        # Sincronize x attribute with rect position.
+        alien.x = float(alien.rect.x)
+
+        # Y position calculation remains unchanged.
+        y = self.sb.level_rect.bottom + alien_height + 2 * alien_height * row_number
+        alien.rect.y = y
+        
+        self.aliens.add(alien)
 
     def _create_fleet(self):
         """Create a full fleet of aliens."""
-        # Make an alien
         alien = Alien(self)
-
-        # Spacing between aliens is one alien width and one alien height
         alien_width, alien_height = alien.rect.size
-        current_x  = alien_width
-        current_y = self.sb.level_rect.bottom + 15
 
-        # Create aliens until there is no more space
-        while current_y < (self.settings.screen_height - 3 * alien_height):
-            # Create a row of aliens
-            while current_x < (self.settings.screen_width - 2 * alien_width):
-                self._create_alien(current_x, current_y)
-                current_x += 2 * alien_width
-            
-            # Finish the row; reset x; move down to next row
-            # Increment y-value
-            current_x = alien_width
-            current_y += 2 * alien_height
+        # Calculate the number of aliens in a row.
+        available_space_x = self.settings.screen_width - (2 * alien_width)
+        number_aliens_x = available_space_x // (2 * alien_width)
+
+        # Calculate side margin for perfect centering and the space of margin.
+        fleet_width = number_aliens_x * (2 * alien_width) - alien_width
+        total_margin = self.settings.screen_width - fleet_width
+        side_margin = total_margin / 2
+
+        # Available space for rows of aliens.
+        available_space_y = (self.settings.screen_height -
+                        (self.sb.level_rect.height + alien_height) -
+                        self.ship.rect.height)
+        number_rows = available_space_y // (2 * alien_height)
+
+        # Create the fleet of aliens.
+        for row_number in range(number_rows):
+            for alien_number in range(number_aliens_x):
+                self._create_alien(alien_number, row_number, side_margin)
 
     def _check_fleet_edges(self):
         """Respond appropriately if any aliens have reached an edge."""
