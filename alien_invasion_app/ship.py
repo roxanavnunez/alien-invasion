@@ -20,8 +20,9 @@ class Ship(Sprite):
         # Get the rect of the image.
         self.rect = self.image.get_rect()
 
-        # Start each new ship at the bottom center of the screen.
-        self.rect.midbottom = self.screen_rect.midbottom
+        # Initial position
+        self.rect.centerx = self.screen_rect.centerx
+        self.rect.bottom = self.screen_rect.bottom - 10
 
         # Store a float value for the ship's horizontal position.
         self.x = float(self.rect.x)
@@ -32,7 +33,7 @@ class Ship(Sprite):
     
     def center_ship(self):
         """Center the ship on the screen."""
-        self.rect.midbottom = self.screen_rect.midbottom
+        self.rect.bottom = self.screen_rect.bottom - 10
         self.x = float(self.rect.x)
 
     def update(self):

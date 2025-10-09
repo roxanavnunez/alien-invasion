@@ -129,8 +129,7 @@ class AlienInvasion:
         self.ship.screen_rect = self.screen.get_rect()
         
         # Adjust ship position to new screen size
-        self.ship.rect.midbottom = self.ship.screen_rect.midbottom
-        self.ship.x = float(self.ship.rect.x)
+        self.ship.center_ship()
 
     def _fire_bullet(self):
         """Create a new bullet and add it to the bullets group."""
