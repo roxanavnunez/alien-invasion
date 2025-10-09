@@ -11,6 +11,7 @@ class Settings:
 
         # Ship settings
         self.ship_limit = 3
+        self.ship_speed = 3.5
         self.ship_scale = 0.45
         self.remain_ship_scale = 0.75
 
@@ -40,7 +41,7 @@ class Settings:
     
     def initialize_dynamic_settings(self): 
         """Initialize settings that change throughout the game."""
-        self.ship_speed = 2.5
+        
         self.bullet_speed = 4.0
         self.alien_speed = 1.0
 
