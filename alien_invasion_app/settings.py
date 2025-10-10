@@ -23,6 +23,7 @@ class Settings:
     
         # Alien Bullet settings
         self.alien_bullet_color = (255, 0, 0)
+        self.alien_bullet_random = None
 
          # Alien settings
         self.alien_scale_factor = 0.13
@@ -60,4 +61,13 @@ class Settings:
         """Increase speed settings and alien point values."""
         self.alien_speed *= self.speedup_scale
         self.alien_points = int(self.alien_points * self.score_scale)
-        self.alien_bullet_random -= 3
+        self._check_alien_bullet_random()
+
+    def _check_alien_bullet_random(self):
+        """Set limit for alien bullet random to 30"""
+        if self.alien_bullet_random > 30:
+            self.alien_bullet_random -= 2
+        else:
+            self.alien_bullet_random = 30
+        
+

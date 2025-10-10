@@ -56,8 +56,8 @@ class AlienInvasion:
                 self._update_bullets()
                 self._update_aliens()
 
-                # Aliens shoot at level 3
-                if self.stats.level >= 3:
+                # Aliens shoot at level 2
+                if self.stats.level >= 2:
                     self._alien_fire()
             
             self._update_screen()         
