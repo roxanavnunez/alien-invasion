@@ -7,7 +7,7 @@ at the bottom of the screen and must shoot down waves of incoming aliens.
 
 ## Gameplay Demo
 
-
+![Image](https://github.com/user-attachments/assets/7e39b1f3-6894-472c-985f-f19101dca90a)
 
 ## Features Implemented
 
