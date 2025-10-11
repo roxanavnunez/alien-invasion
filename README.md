@@ -19,7 +19,7 @@ at the bottom of the screen and must shoot down waves of incoming aliens.
 * Pause and resume functionality with the `P` key.
 * Keyboard shortcut to quit (`Escape`) the game.
 
-### 👽 Enemies & AI
+### 👽 Enemies
 * A full fleet of aliens generated in a grid formation.
 * Classic fleet movement: side-to-side and dropping down when an edge is reached.
 * Aliens have the ability to shoot back at the player at level 2.
