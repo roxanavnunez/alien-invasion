@@ -1,6 +1,15 @@
 import pygame
+import sys
+import os
 from pygame.sprite import Sprite    
 
+def resource_path(relative_path):
+    """Get abosolute path"""
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path,relative_path)
 class Ship(Sprite):
     """A class to manage the ship"""
 
@@ -12,7 +21,8 @@ class Ship(Sprite):
         self.screen_rect = ai_game.screen.get_rect()
 
         # Load the ship image and resize it
-        original_image = pygame.image.load('images/ship.png').convert_alpha()
+        image_path = resource_path('images/ship.png')
+        original_image = pygame.image.load(image_path).convert_alpha()
         original_size = original_image.get_size()
         new_size = self.settings.resize_image(original_size, self.settings.ship_scale)
         self.image = pygame.transform.scale(original_image, new_size)

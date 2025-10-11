@@ -1,6 +1,16 @@
 import pygame
+import sys
+import os
+
 from pygame.sprite import Sprite
 
+def resource_path(relative_path):
+    """Get abosolute path"""
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path,relative_path)
 class Alien(Sprite):
     """A class to represent a single alien in the fleet."""
 
@@ -11,7 +21,8 @@ class Alien(Sprite):
         self.settings = ai_game.settings
         
         # Load the alien image and set its rect attribute.
-        original_image = pygame.image.load('images/alien.png')
+        image_path = resource_path('images/alien.png')
+        original_image = pygame.image.load(image_path)
 
         # Scale the alien image to 20% of its original size
         original_size = original_image.get_size()
