@@ -57,9 +57,8 @@ at the bottom of the screen and must shoot down waves of incoming aliens.
 To clone and run this project locally, follow these steps:
 
 1.  **Clone the repository:**
-    ```
-    sh
-    git clone <YOUR_REPOSITORY_URL_HERE>
+    ```sh
+    git clone [https://github.com/roxanavnunez/alien-invasion.git]
     ```
 2.  **Navigate to the project directory:**
     ```sh
