@@ -62,7 +62,7 @@ To clone and run this project locally, follow these steps:
     ```
 2.  **Navigate to the project directory:**
     ```sh
-    cd <PROJECT_DIRECTORY_NAME>
+    cd alien_invasion
     ```
 3.  **(Recommended) Create and activate a virtual environment:**
     ```sh
